@@ -38,7 +38,7 @@ function deriveGameBoard(gameTurns) {
         gameBoard[row][col] = player;
     }
 
-    for (const combinations of WINNER_COMBINATIONS) {
+    for (const combinations of WINNING_COMBINATIONS) {
         const firstSquareSymbol =
             gameBoard[combinations[0].row][combinations[0].column];
         const secondSquareSymbol =
