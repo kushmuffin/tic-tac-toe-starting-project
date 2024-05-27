@@ -19,10 +19,10 @@ const INITIAL_GAME_BOARD = [
 
 //切換玩家
 function deriveActivePlayer(gameTurns) {
-    let currentPlayer = 'X';
+    let currentPlayer = "X";
 
-    if (gameTurns.length > 0 && gameTurns[0].player === 'X') {
-        currentPlayer = 'O';
+    if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+        currentPlayer = "O";
     }
 
     return currentPlayer;
@@ -36,6 +36,18 @@ function deriveGameBoard(gameTurns) {
         const { row, col } = square;
 
         gameBoard[row][col] = player;
+    }
+
+    for (const combinations of WINNER_COMBINATIONS) {
+        const firstSquareSymbol =
+            gameBoard[combinations[0].row][combinations[0].column];
+        const secondSquareSymbol =
+            gameBoard[combinations[1].row][combinations[1].column];
+        const thirdSquareSymbol =
+            gameBoard[combinations[2].row][combinations[2].column];
+
+        if (firstSquareSymbol) {
+        }
     }
 
     return gameBoard;
