@@ -6,11 +6,12 @@ import Log from "./components/Log.jsx";
 import GameOver from "./components/GameOver.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
+//玩家
 const PLAYERS = {
   X: "Player 1",
   O: "Player 2",
 };
-//先一個乾淨的板
+//設定3*3遊戲板
 const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
@@ -21,6 +22,7 @@ const INITIAL_GAME_BOARD = [
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = "X";
 
+  //確認步數為零 && 玩家為"X"
   if (gameTurns.length > 0 && gameTurns[0].player === "X") {
     currentPlayer = "O";
   }
@@ -36,18 +38,6 @@ function deriveGameBoard(gameTurns) {
     const { row, col } = square;
 
     gameBoard[row][col] = player;
-  }
-
-  for (const combinations of WINNING_COMBINATIONS) {
-    const firstSquareSymbol =
-      gameBoard[combinations[0].row][combinations[0].column];
-    const secondSquareSymbol =
-      gameBoard[combinations[1].row][combinations[1].column];
-    const thirdSquareSymbol =
-      gameBoard[combinations[2].row][combinations[2].column];
-
-    if (firstSquareSymbol) {
-    }
   }
 
   return gameBoard;
@@ -98,6 +88,7 @@ function App() {
         ...prevTurns,
       ];
 
+      console.log("Updated gameTurns:", updatedTurns); //檢視步驟
       return updatedTurns;
     });
   }
@@ -106,7 +97,7 @@ function App() {
   function handleRestart() {
     setGameTurns([]);
   }
-
+  //更改玩家名稱
   function handlePlayerNameChange(symbol, newName) {
     setPlayers((prevPlayers) => {
       return {
