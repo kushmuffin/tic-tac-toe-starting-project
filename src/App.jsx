@@ -4,6 +4,7 @@ import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
 import GameOver from "./components/GameOver.jsx";
+import RestartGame from "./components/Restart.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
 //玩家
@@ -31,8 +32,10 @@ function deriveActivePlayer(gameTurns) {
 }
 
 function deriveGameBoard(gameTurns) {
+  // 基於INITIAL_GAME_BOARD 創一個新的遊戲板並map 每一行
   let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
 
+  //提取出每次步驟資訊 {位置, 玩家}
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -128,6 +131,7 @@ function App() {
           <GameOver winner={winner} setRestart={handleRestart} />
         )}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
+        <RestartGame restartGame={handleRestart} />
       </div>
       <Log turns={gameTurns} />
     </main>
